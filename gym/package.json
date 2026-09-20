@@ -1,0 +1,21 @@
+{
+  "name": "apex-titan-gym",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Apex Titan Fitness & Performance - Next-generation gym website with Pentogrid layout, Glassmorphism, and Precision Diet Portal",
+  "scripts": {
+    "dev": "powershell -ExecutionPolicy Bypass -File ./server.ps1",
+    "start": "powershell -ExecutionPolicy Bypass -File ./server.ps1"
+  },
+  "keywords": [
+    "gym",
+    "fitness",
+    "diet-plan",
+    "macro-calculator",
+    "bento-grid",
+    "glassmorphism",
+    "vercel"
+  ],
+  "author": "Apex Titan Athletics",
+  "license": "MIT"
+}
