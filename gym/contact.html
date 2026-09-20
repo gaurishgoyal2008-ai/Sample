@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Contact Apex Titan Fitness & Performance - Schedule a facility tour, claim your 1-day pass, view staffed hours, parking directions, and consult our trainers.">
+  <title>Contact & Facility Visit | Apex Titan Fitness & Performance</title>
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  
+  <!-- Favicon Mock -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📍</text></svg>">
+</head>
+<body>
+
+  <!-- Ambient Light Orbs -->
+  <div class="bg-ambient-orb orb-1"></div>
+  <div class="bg-ambient-orb orb-2"></div>
+  <div class="bg-ambient-orb orb-3"></div>
+
+  <!-- Glassmorphic Header Navigation -->
+  <header class="site-header">
+    <div class="nav-glass-container">
+      <a href="index.html" class="brand-logo" id="brandLogo">
+        <div class="brand-icon-badge">⚡</div>
+        <div class="brand-text">APEX<span>TITAN</span></div>
+      </a>
+
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="diet.html" class="nav-link">Diet & Macros</a></li>
+          <li><a href="index.html#facilities" class="nav-link">Facilities</a></li>
+          <li><a href="index.html#schedule" class="nav-link">Timetable</a></li>
+          <li><a href="index.html#pricing" class="nav-link">Memberships</a></li>
+          <li><a href="contact.html" class="nav-link active">Contact & Visit</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="diet.html" class="btn-secondary">Diet Portal</a>
+        <a href="tel:+18005554766" class="btn-primary">
+          <span>Call Desk</span>
+          <span>📞</span>
+        </a>
+        <button class="mobile-toggle" aria-label="Toggle navigation menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-nav-drawer">
+    <a href="index.html">Home</a>
+    <a href="diet.html">Diet & Nutrition Plans</a>
+    <a href="index.html#facilities">Facilities & Tech</a>
+    <a href="index.html#schedule">Class Timetable</a>
+    <a href="index.html#pricing">Memberships</a>
+    <a href="contact.html">Contact & Location</a>
+  </div>
+
+  <main>
+    <!-- CONTACT HERO -->
+    <section class="contact-hero">
+      <div class="container">
+        <div class="section-header" style="margin-bottom: 36px;">
+          <div class="section-tag">
+            <span class="pulse-dot"></span>
+            <span>Connect With Us</span>
+          </div>
+          <h1>Initiate Your <span class="text-gradient-lime">Transformation</span></h1>
+          <p>
+            Schedule a private tour, request your complimentary 1-day VIP pass, or book a consultation with our sports nutrition specialists.
+          </p>
+        </div>
+
+        <!-- PENTOGRID / BENTO GRID CONTACT HUB -->
+        <div class="contact-bento-grid">
+          
+          <!-- Bento Tile 1 (Span 7): Interactive Inquiry Form -->
+          <div class="glass-card contact-form-tile col-7 glass-card-glow-lime">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+              <h2 style="font-size: 1.8rem;">Send Direct Inquiry</h2>
+              <span class="glass-pill" style="font-size: 0.75rem; color: var(--accent-lime);">Average Response: &lt; 2h</span>
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 24px;">
+              Fill out the details below and our head athletic director will prepare your arrival credentials.
+            </p>
+
+            <form id="gymContactForm" style="display: flex; flex-direction: column; gap: 18px;">
+              
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                <div class="form-group">
+                  <label for="contactName">Full Name *</label>
+                  <input type="text" id="contactName" class="glass-input" placeholder="e.g. Liam Vance" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="contactEmail">Email Address *</label>
+                  <input type="email" id="contactEmail" class="glass-input" placeholder="liam@domain.com" required>
+                </div>
+              </div>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                <div class="form-group">
+                  <label for="contactPhone">Phone Number</label>
+                  <input type="tel" id="contactPhone" class="glass-input" placeholder="+1 (555) 234-5678">
+                </div>
+
+                <div class="form-group">
+                  <label for="contactReason">Reason For Contact</label>
+                  <select id="contactReason" class="glass-select">
+                    <option value="Trial Pass">Claim Free 1-Day VIP Pass</option>
+                    <option value="Personal Training">1-on-1 Personal Training Inquiry</option>
+                    <option value="Diet Consultation">Custom Nutrition & Diet Plan Consultation</option>
+                    <option value="Membership">Membership Tiers & Corporate Rates</option>
+                    <option value="Facility Tour">Private Guided Facility Tour</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="contactTime">Preferred Workout or Visit Time</label>
+                <select id="contactTime" class="glass-select">
+                  <option value="Morning">Early Morning (05:00 AM - 09:00 AM)</option>
+                  <option value="Midday">Midday (11:00 AM - 02:00 PM)</option>
+                  <option value="Evening">Peak Evening (05:00 PM - 08:30 PM)</option>
+                  <option value="Night">Late Night (09:00 PM onwards)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="contactMessage">Current Goals or Questions</label>
+                <textarea id="contactMessage" class="glass-input" rows="4" placeholder="Tell us your current bench/deadlift, weight loss target, or specific dietary restrictions..."></textarea>
+              </div>
+
+              <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; padding: 16px; font-size: 1.05rem; margin-top: 6px;">
+                <span>Submit Inquiry & Reserve Pass</span>
+                <span>⚡</span>
+              </button>
+
+            </form>
+          </div>
+
+          <!-- Bento Tile 2 (Span 5): Location & Hours Card -->
+          <div class="glass-card contact-info-tile col-5">
+            <div>
+              
+              <!-- Live Facility Status Pill -->
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+                <div class="live-status-pill">
+                  <span class="pulse-dot"></span>
+                  <span>Facility Open Now</span>
+                </div>
+                <span style="font-family: var(--font-mono); color: var(--accent-lime); font-size: 0.85rem;">24/7 ACTIVE</span>
+              </div>
+
+              <h3 style="font-size: 1.6rem; margin-bottom: 16px;">Apex Titan Sanctum</h3>
+
+              <!-- Detail Rows -->
+              <div class="contact-detail-row">
+                <div class="contact-icon-bubble">📍</div>
+                <div>
+                  <div style="font-weight: 700; color: #FFFFFF;">Physical Address</div>
+                  <div style="color: var(--text-muted); font-size: 0.95rem;">
+                    742 Iron Forge Boulevard, Suite 100<br>Metro Performance District, NY 10014
+                  </div>
+                </div>
+              </div>
+
+              <div class="contact-detail-row">
+                <div class="contact-icon-bubble">📞</div>
+                <div>
+                  <div style="font-weight: 700; color: #FFFFFF;">Direct Telephone</div>
+                  <div style="color: var(--text-muted); font-size: 0.95rem;">
+                    Toll-Free: <a href="tel:+18005554766" style="color: var(--accent-lime); text-decoration: none;">(800) 555-IRON</a><br>
+                    Front Desk: (555) 928-3490
+                  </div>
+                </div>
+              </div>
+
+              <div class="contact-detail-row">
+                <div class="contact-icon-bubble">✉️</div>
+                <div>
+                  <div style="font-weight: 700; color: #FFFFFF;">Email Channels</div>
+                  <div style="color: var(--text-muted); font-size: 0.95rem;">
+                    General: <a href="mailto:concierge@apextitan.com" style="color: var(--text-sub); text-decoration: none;">concierge@apextitan.com</a><br>
+                    Dietitians: <a href="mailto:nutrition@apextitan.com" style="color: var(--text-sub); text-decoration: none;">nutrition@apextitan.com</a>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Hours Table -->
+            <div id="hours">
+              <div style="font-weight: 700; font-size: 0.95rem; color: #FFFFFF; margin-bottom: 8px;">Facility Hours Breakdown:</div>
+              <div class="hours-badge-table">
+                <div class="hours-row">
+                  <span style="color: var(--text-sub);">Keycard Members</span>
+                  <strong style="color: var(--accent-lime);">24 Hours / 7 Days</strong>
+                </div>
+                <div class="hours-row">
+                  <span style="color: var(--text-sub);">Staffed Desk & Tours</span>
+                  <span style="color: #FFFFFF;">05:00 AM – 11:00 PM</span>
+                </div>
+                <div class="hours-row">
+                  <span style="color: var(--text-sub);">Cryo Recovery & Sauna</span>
+                  <span style="color: var(--accent-cyan);">06:00 AM – 10:30 PM</span>
+                </div>
+                <div class="hours-row">
+                  <span style="color: var(--text-sub);">Apex Fuel Bar</span>
+                  <span style="color: #FFFFFF;">06:30 AM – 09:00 PM</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Bento Tile 3 (Span 12): Interactive Location & Map Mockup -->
+          <div class="glass-card col-12" style="padding: 0; overflow: hidden;">
+            <div class="map-canvas-card">
+              <div class="map-pin-pulse">⚡</div>
+              
+              <div style="position: relative; z-index: 2; background: rgba(7, 9, 14, 0.85); backdrop-filter: blur(14px); padding: 20px 24px; border-radius: var(--radius-md); border: 1px solid rgba(255, 255, 255, 0.1); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+                <div>
+                  <div style="font-family: var(--font-display); font-size: 1.25rem; font-weight: 800; color: #FFFFFF;">
+                    Easy Transit & Secure Athlete Parking
+                  </div>
+                  <div style="color: var(--text-muted); font-size: 0.9rem; margin-top: 2px;">
+                    120-bay secure athlete garage with complimentary Level-2 EV Charging. 3-minute walk from Forge Central Subway.
+                  </div>
+                </div>
+
+                <div style="display: flex; gap: 12px;">
+                  <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" class="btn-primary" style="font-size: 0.9rem;">
+                    <span>Open in Maps</span>
+                    <span>🗺️</span>
+                  </a>
+                  <a href="tel:+18005554766" class="btn-secondary" style="font-size: 0.9rem;">
+                    <span>Call Concierge</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- FREQUENTLY ASKED QUESTIONS (GLASS ACCORDION) -->
+        <div style="max-width: 900px; margin: 0 auto 80px auto;">
+          <div class="section-header" style="margin-bottom: 36px;">
+            <div class="section-tag">
+              <span class="pulse-dot"></span>
+              <span>Need Answers?</span>
+            </div>
+            <h2>Frequently Asked <span class="text-gradient-lime">Questions</span></h2>
+            <p>Everything you need to know before stepping onto the training floor.</p>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 14px;">
+            
+            <!-- Item 1 -->
+            <div class="glass-card faq-accordion-item" style="padding: 24px; cursor: pointer;">
+              <div class="faq-question" style="display: flex; justify-content: space-between; align-items: center; font-weight: 700; font-size: 1.15rem; color: #FFFFFF;">
+                <span>What do I need to bring for my 1-Day VIP Pass?</span>
+                <span style="color: var(--accent-lime); font-size: 1.4rem;">+</span>
+              </div>
+              <div class="faq-answer" style="color: var(--text-muted); font-size: 0.95rem; margin-top: 14px; line-height: 1.6;">
+                Just bring valid government photo identification, clean indoor workout footwear, and your training gear. We provide complimentary luxury towel service, locker locks, and premium shower amenities including Malin+Goetz body care.
+              </div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="glass-card faq-accordion-item" style="padding: 24px; cursor: pointer;">
+              <div class="faq-question" style="display: flex; justify-content: space-between; align-items: center; font-weight: 700; font-size: 1.15rem; color: #FFFFFF;">
+                <span>How does the 24/7 keyless biometric access work?</span>
+                <span style="color: var(--accent-lime); font-size: 1.4rem;">+</span>
+              </div>
+              <div class="faq-answer" style="color: var(--text-muted); font-size: 0.95rem; margin-top: 14px; line-height: 1.6;">
+                Upon joining, our team registers your smartphone NFC digital pass and optional facial biometric scan at the front desk. This enables hands-free instant entry into the facility at any hour of the day or night, 365 days a year.
+              </div>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="glass-card faq-accordion-item" style="padding: 24px; cursor: pointer;">
+              <div class="faq-question" style="display: flex; justify-content: space-between; align-items: center; font-weight: 700; font-size: 1.15rem; color: #FFFFFF;">
+                <span>Can your dietitians build custom diet plans for food allergies?</span>
+                <span style="color: var(--accent-lime); font-size: 1.4rem;">+</span>
+              </div>
+              <div class="faq-answer" style="color: var(--text-muted); font-size: 0.95rem; margin-top: 14px; line-height: 1.6;">
+                Yes! Our in-house registered dietitians formulate hyper-personalized protocols tailored to gluten sensitivities, lactose intolerance, FODMAP limits, vegan requirements, and athletic competition prep timelines.
+              </div>
+            </div>
+
+            <!-- Item 4 -->
+            <div class="glass-card faq-accordion-item" style="padding: 24px; cursor: pointer;">
+              <div class="faq-question" style="display: flex; justify-content: space-between; align-items: center; font-weight: 700; font-size: 1.15rem; color: #FFFFFF;">
+                <span>Are there contracts or cancellation penalties?</span>
+                <span style="color: var(--accent-lime); font-size: 1.4rem;">+</span>
+              </div>
+              <div class="faq-answer" style="color: var(--text-muted); font-size: 0.95rem; margin-top: 14px; line-height: 1.6;">
+                None whatsoever. We believe in earning your loyalty every single workout. Monthly memberships can be paused or canceled anytime with a simple 30-day email notification to concierge@apextitan.com.
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- VIP DAY PASS MODAL (INTERACTIVE GENERATOR) -->
+  <div class="modal-backdrop" id="passModal">
+    <div class="modal-dialog">
+      
+      <!-- Modal Form State -->
+      <div class="glass-card" id="vipPassForm" style="padding: 40px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px;">
+          <div>
+            <div class="section-tag" style="margin-bottom: 8px;">VIP Invitation</div>
+            <h3 style="font-size: 1.8rem;">Claim Free 1-Day Pass</h3>
+          </div>
+          <button class="close-modal-btn" style="background: none; border: none; color: #FFFFFF; font-size: 1.5rem; cursor: pointer;">✕</button>
+        </div>
+        <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 24px;">
+          Test drive all 15,000 sq ft, our cold plunge recovery tubs, and a masterclass with zero obligations.
+        </p>
+
+        <form id="passFormElement" style="display: flex; flex-direction: column; gap: 16px;">
+          <div class="form-group">
+            <label for="guestName">Full Name</label>
+            <input type="text" id="guestName" class="glass-input" placeholder="e.g. Alex Mercer" required>
+          </div>
+          <div class="form-group">
+            <label for="guestEmail">Email Address</label>
+            <input type="email" id="guestEmail" class="glass-input" placeholder="alex@domain.com" required>
+          </div>
+          <div class="form-group">
+            <label for="guestPhone">Phone Number</label>
+            <input type="tel" id="guestPhone" class="glass-input" placeholder="+1 (555) 000-0000" required>
+          </div>
+          
+          <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; margin-top: 10px;">
+            <span>Generate Digital VIP Pass</span>
+            <span>⚡</span>
+          </button>
+        </form>
+      </div>
+
+      <!-- Generated Ticket View (Hidden initially) -->
+      <div id="passTicketView" style="display: none;">
+        <div class="digital-pass-card">
+          <div class="pass-notch-left"></div>
+          <div class="pass-notch-right"></div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <div class="brand-logo">
+              <div class="brand-icon-badge" style="width: 32px; height: 32px; font-size: 0.9rem;">⚡</div>
+              <div class="brand-text" style="font-size: 1.1rem;">APEX<span>TITAN</span></div>
+            </div>
+            <span class="section-tag" style="margin-bottom: 0;">1-DAY VIP PASS</span>
+          </div>
+
+          <div style="margin: 24px 0;">
+            <div style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">Pass Holder</div>
+            <div id="ticketHolderName" style="font-family: var(--font-display); font-size: 1.6rem; font-weight: 800; color: #FFFFFF;">
+              Alex Mercer
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px;">
+            <div>
+              <div style="font-size: 0.8rem; color: var(--text-muted);">Pass ID</div>
+              <div id="ticketIdDisplay" style="font-family: var(--font-mono); color: var(--accent-lime); font-weight: 700;">APX-847291</div>
+            </div>
+            <div>
+              <div style="font-size: 0.8rem; color: var(--text-muted);">Valid Until</div>
+              <div id="ticketValidDate" style="font-family: var(--font-mono); color: #FFFFFF; font-weight: 700;">Oct 28, 2026</div>
+            </div>
+          </div>
+
+          <div class="pass-barcode-area">
+            <div style="font-size: 0.75rem; color: var(--text-muted); letter-spacing: 0.1em;">SCAN AT FRONT CONCIERGE DESK</div>
+            <div class="simulated-barcode"></div>
+            <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted);">*APEX-TITAN-VIP-ALL-ACCESS*</div>
+          </div>
+
+          <div style="display: flex; gap: 12px; margin-top: 24px;">
+            <button id="printPassBtn" class="btn-primary" style="flex: 1; justify-content: center;">
+              <span>Save / Print Pass</span>
+              <span>🖨️</span>
+            </button>
+            <button onclick="document.getElementById('passModal').classList.remove('active')" class="btn-secondary" style="flex: 1; justify-content: center;">
+              Done
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- GLASS FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bento">
+        
+        <div class="footer-brand">
+          <a href="index.html" class="brand-logo">
+            <div class="brand-icon-badge">⚡</div>
+            <div class="brand-text">APEX<span>TITAN</span></div>
+          </a>
+          <p>
+            An uncompromising fitness and physical performance sanctum designed to forge resilience, strength, and biological longevity.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home Overview</a></li>
+            <li><a href="diet.html">Interactive Diet Plans</a></li>
+            <li><a href="diet.html#calculator">Macro Calculator</a></li>
+            <li><a href="index.html#schedule">Class Timetable</a></li>
+            <li><a href="index.html#pricing">Membership Tiers</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Protocols & Tech</h4>
+          <ul class="footer-links">
+            <li><a href="diet.html#protocol-shred">The Titan Shred</a></li>
+            <li><a href="diet.html#protocol-bulking">Mass Hypertrophy</a></li>
+            <li><a href="diet.html#protocol-vegan">Plant-Powered Beast</a></li>
+            <li><a href="index.html#facilities">Cold Plunge & Cryo</a></li>
+            <li><a href="index.html#facilities">Biomechanical Iron</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Direct Concierge</h4>
+          <ul class="footer-links">
+            <li><a href="contact.html">Schedule Facility Tour</a></li>
+            <li><a href="tel:+18005554766">Direct Line: (800) 555-IRON</a></li>
+            <li><a href="mailto:concierge@apextitan.com">concierge@apextitan.com</a></li>
+            <li><a href="contact.html#hours">Staffed Hours & FAQ</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <div>© 2026 Apex Titan Fitness & Performance LLC. All Rights Reserved. Built with Pentogrid & Glassmorphism.</div>
+        <div style="display: flex; gap: 20px;">
+          <a href="diet.html" style="color: var(--text-muted); text-decoration: none;">Nutrition Disclaimer</a>
+          <a href="contact.html" style="color: var(--text-muted); text-decoration: none;">Privacy Policy</a>
+          <a href="contact.html" style="color: var(--text-muted); text-decoration: none;">Terms of Membership</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/app.js"></script>
+</body>
+</html>

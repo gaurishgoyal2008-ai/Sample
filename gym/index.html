@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Apex Titan Fitness & Performance - High-performance gym featuring biomechanical strength zones, cold plunge recovery, precision diet plans, and 24/7 access.">
+  <title>Apex Titan Fitness & Performance | Elite Training & Precision Nutrition</title>
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  
+  <!-- Favicon Mock -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+</head>
+<body>
+
+  <!-- Ambient Light Orbs -->
+  <div class="bg-ambient-orb orb-1"></div>
+  <div class="bg-ambient-orb orb-2"></div>
+  <div class="bg-ambient-orb orb-3"></div>
+
+  <!-- Glassmorphic Header Navigation -->
+  <header class="site-header">
+    <div class="nav-glass-container">
+      <a href="index.html" class="brand-logo" id="brandLogo">
+        <div class="brand-icon-badge">⚡</div>
+        <div class="brand-text">APEX<span>TITAN</span></div>
+      </a>
+
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="index.html" class="nav-link active">Home</a></li>
+          <li><a href="diet.html" class="nav-link">Diet & Macros</a></li>
+          <li><a href="#facilities" class="nav-link">Facilities</a></li>
+          <li><a href="#schedule" class="nav-link">Timetable</a></li>
+          <li><a href="#pricing" class="nav-link">Memberships</a></li>
+          <li><a href="contact.html" class="nav-link">Contact & Visit</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="diet.html" class="btn-secondary">Diet Planner</a>
+        <button class="btn-primary trigger-pass-modal" id="navClaimPassBtn">
+          <span>Free 1-Day Pass</span>
+          <span>→</span>
+        </button>
+        <button class="mobile-toggle" aria-label="Toggle navigation menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-nav-drawer">
+    <a href="index.html">Home</a>
+    <a href="diet.html">Diet & Nutrition Plans</a>
+    <a href="#facilities">Facilities & Tech</a>
+    <a href="#schedule">Class Timetable</a>
+    <a href="#pricing">Memberships</a>
+    <a href="contact.html">Contact & Location</a>
+    <button class="btn-primary trigger-pass-modal" style="width: 100%; justify-content: center; margin-top: 20px;">
+      Claim Free 1-Day Pass
+    </button>
+  </div>
+
+  <main>
+    <!-- HERO SECTION (BENTO GRID ARCHITECTURE) -->
+    <section class="hero-section">
+      <div class="container">
+        <div class="hero-bento-grid">
+          
+          <!-- Main Hero Bento Card (8 columns) -->
+          <div class="glass-card hero-main-card">
+            <div class="section-tag">
+              <span class="pulse-dot"></span>
+              <span>Next-Generation Athletic Facility</span>
+            </div>
+            <h1>Forge Your <br><span class="text-gradient-lime">Strongest Self</span></h1>
+            <p>
+              Experience elite biomechanical strength equipment, cold plunge recovery, science-backed precision diet protocols, and round-the-clock access designed for serious physical transformation.
+            </p>
+            <div class="hero-cta-group">
+              <button class="btn-primary trigger-pass-modal" id="heroClaimBtn">
+                <span>Claim Free 1-Day VIP Pass</span>
+                <span>⚡</span>
+              </button>
+              <a href="diet.html" class="btn-secondary" id="heroDietBtn">
+                <span>Calculate Your Diet & Macros</span>
+                <span>→</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Hero Side Bento Tile 1 (4 columns) - Live Capacity & Vibe -->
+          <div class="glass-card hero-side-top">
+            <div>
+              <div class="live-status-pill">
+                <span class="pulse-dot"></span>
+                <span>Live Gym Occupancy</span>
+              </div>
+              <div class="stat-huge">38<span style="font-size: 2rem; color: var(--accent-lime);">%</span></div>
+              <div class="stat-label">Moderate Flow • Prime Lifting Windows Available</div>
+            </div>
+            
+            <div style="background: rgba(255, 255, 255, 0.04); padding: 14px; border-radius: var(--radius-md); border: 1px solid rgba(255, 255, 255, 0.07); margin-top: 20px;">
+              <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 6px;">
+                <span style="color: var(--text-sub);">Peak Surge Expected</span>
+                <span style="color: var(--accent-lime); font-family: var(--font-mono);">6:30 PM - 8:00 PM</span>
+              </div>
+              <div class="macro-progress-track">
+                <div class="macro-progress-fill fill-protein" style="width: 38%;"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hero Side Bento Tile 2 (4 columns) - Facility Stats -->
+          <div class="glass-card hero-side-bottom">
+            <div>
+              <div class="section-tag" style="background: rgba(255, 85, 0, 0.1); border-color: rgba(255, 85, 0, 0.3); color: var(--accent-orange);">
+                <span>Facility Metrics</span>
+              </div>
+              <div class="stat-huge" style="color: var(--accent-orange);">15K<span style="font-size: 1.8rem; color: #FFFFFF;">+</span></div>
+              <div class="stat-label">Square Feet of Premium Calibrated Iron & Recovery Lab</div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px;">
+              <div style="background: rgba(0,0,0,0.3); padding: 10px; border-radius: var(--radius-sm); border: 1px solid rgba(255,255,255,0.06);">
+                <div style="font-family: var(--font-display); font-size: 1.3rem; font-weight: 800; color: #FFFFFF;">24/7</div>
+                <div style="font-size: 0.75rem; color: var(--text-muted);">Keyless Access</div>
+              </div>
+              <div style="background: rgba(0,0,0,0.3); padding: 10px; border-radius: var(--radius-sm); border: 1px solid rgba(255,255,255,0.06);">
+                <div style="font-family: var(--font-display); font-size: 1.3rem; font-weight: 800; color: var(--accent-cyan);">38°F</div>
+                <div style="font-size: 0.75rem; color: var(--text-muted);">Ice Plunge Lab</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- PENTOGRID SHOWCASE (5-TILE BENTO FACILITY SYSTEM) -->
+    <section class="pento-showcase-section" id="facilities">
+      <div class="container">
+        
+        <div class="section-header">
+          <div class="section-tag">
+            <span class="pulse-dot"></span>
+            <span>The Titan Ecosystem</span>
+          </div>
+          <h2>Engineered For <span class="text-gradient-lime">Peak Performance</span></h2>
+          <p>Every square inch has been mathematically planned to optimize hypertrophy, nervous system recovery, and metabolic output.</p>
+        </div>
+
+        <!-- 5-Piece Pentogrid Layout -->
+        <div class="bento-grid">
+          
+          <!-- Tile 1 (Span 8): Biomechanical Heavy Iron Zone -->
+          <div class="glass-card bento-item col-8 glass-card-glow-lime">
+            <div class="pento-card-image" style="background-image: url('https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=1200&q=80'); height: 220px;">
+              <span class="pento-card-badge">STRENGTH & HYPERTROPHY</span>
+            </div>
+            <div>
+              <h3 class="card-title">Biomechanical Heavy Iron & Olympic Platforms</h3>
+              <p class="card-desc">
+                Custom-engineered Arsenal Strength & Hammer Strength plate-loaded equipment designed strictly along natural human anatomical strength curves. 6 dedicated Olympic lifting platforms with Eleiko competition bumpers.
+              </p>
+            </div>
+            <div class="card-metric-strip">
+              <span class="glass-pill">⚡ 120lb Max Dumbbells</span>
+              <span class="card-metric-val">CALIBRATED STEEL</span>
+            </div>
+          </div>
+
+          <!-- Tile 2 (Span 4): Cryo & Thermal Recovery Lounge -->
+          <div class="glass-card bento-item col-4">
+            <div class="pento-card-image" style="background-image: url('https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=800&q=80');">
+              <span class="pento-card-badge" style="color: var(--accent-cyan); border-color: rgba(0, 240, 255, 0.4);">RECOVERY LAB</span>
+            </div>
+            <div>
+              <h3 class="card-title">Cryo-Plunge & Infrared Sauna</h3>
+              <p class="card-desc">
+                Accelerate lactate clearance and down-regulate sympathetic cortisol with our commercial twin cold plunge tubs (38°F) and 180°F Cedar Finnish saunas.
+              </p>
+            </div>
+            <div class="card-metric-strip">
+              <span class="glass-pill">❄️ 38°F Submersion</span>
+              <span class="card-metric-val" style="color: var(--accent-cyan);">RAPID RESTORE</span>
+            </div>
+          </div>
+
+          <!-- Tile 3 (Span 4): High-Octane Turf & Conditioning -->
+          <div class="glass-card bento-item col-4">
+            <div class="pento-card-image" style="background-image: url('https://images.unsplash.com/photo-1574680096145-d05b474e2155?auto=format&fit=crop&w=800&q=80');">
+              <span class="pento-card-badge" style="color: var(--accent-orange); border-color: rgba(255, 85, 0, 0.4);">HYROX & METABOLIC</span>
+            </div>
+            <div>
+              <h3 class="card-title">Kinetic Turf & Sled Sprint Track</h3>
+              <p class="card-desc">
+                50-meter indoor astroturf runway equipped with torque tank sleds, Rogue Echo bikes, Concept2 rowers, and SkiErgs for unmatched conditioning.
+              </p>
+            </div>
+            <div class="card-metric-strip">
+              <span class="glass-pill">🔥 50M Track</span>
+              <span class="card-metric-val" style="color: var(--accent-orange);">VO2 MAX</span>
+            </div>
+          </div>
+
+          <!-- Tile 4 (Span 4): Dedicated Nutrition & Shake Bar -->
+          <div class="glass-card bento-item col-4">
+            <div class="pento-card-image" style="background-image: url('https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=800&q=80');">
+              <span class="pento-card-badge">CLEAN FUEL</span>
+            </div>
+            <div>
+              <h3 class="card-title">Apex Fuel Bar & Macro Prep</h3>
+              <p class="card-desc">
+                On-site artisan protein shake bar, fresh electrolyte cold taps, and pre-packaged macro-balanced chef meals ready for post-workout anabolic recovery.
+              </p>
+            </div>
+            <div class="card-metric-strip">
+              <span class="glass-pill">🥗 Chef-Crafted Meals</span>
+              <span class="card-metric-val">ZERO FILLERS</span>
+            </div>
+          </div>
+
+          <!-- Tile 5 (Span 4): Biometric 24/7 Smart Keyless Access -->
+          <div class="glass-card bento-item col-4">
+            <div class="pento-card-image" style="background-image: url('https://images.unsplash.com/photo-1558611848-73f7eb4001a1?auto=format&fit=crop&w=800&q=80');">
+              <span class="pento-card-badge">SMART ACCESS</span>
+            </div>
+            <div>
+              <h3 class="card-title">24/7 Biometric Smart Access</h3>
+              <p class="card-desc">
+                Train on your schedule. Secure NFC phone-tap and biometric facial access allows unhindered entry 365 days a year, with high-definition CCTV security.
+              </p>
+            </div>
+            <div class="card-metric-strip">
+              <span class="glass-pill">📱 Tap & Lift</span>
+              <span class="card-metric-val">365 DAYS</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- QUICK NUTRITION TEASER SECTION -->
+    <section style="padding: 20px 0 80px 0;">
+      <div class="container">
+        <div class="glass-card" style="padding: 50px; background: linear-gradient(135deg, rgba(212, 255, 0, 0.08) 0%, rgba(13, 17, 26, 0.95) 100%); border: 1px solid rgba(212, 255, 0, 0.3);">
+          <div style="display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; align-items: center;">
+            <div>
+              <div class="section-tag">
+                <span class="pulse-dot"></span>
+                <span>Precision Fueling</span>
+              </div>
+              <h2 style="font-size: clamp(2rem, 3.5vw, 2.8rem); margin-bottom: 16px;">
+                Workouts Break You Down. <br><span class="text-gradient-lime">Nutrition Builds The Beast.</span>
+              </h2>
+              <p style="color: var(--text-sub); font-size: 1.1rem; margin-bottom: 26px;">
+                Don't guess your nutrition. Use our scientific Macro & Calorie Calculator to calibrate your daily protein, carbs, fats, and water intake customized for Fat Loss, Hypertrophy, or Athletic Endurance.
+              </p>
+              <div style="display: flex; gap: 14px; flex-wrap: wrap;">
+                <a href="diet.html" class="btn-primary">
+                  <span>Open Interactive Diet Portal</span>
+                  <span>⚡</span>
+                </a>
+                <a href="diet.html#calculator" class="btn-secondary">
+                  <span>Calculate My Macros</span>
+                </a>
+              </div>
+            </div>
+            
+            <div style="background: rgba(7, 9, 14, 0.7); padding: 30px; border-radius: var(--radius-lg); border: 1px solid rgba(255, 255, 255, 0.1);">
+              <div style="font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; margin-bottom: 18px; color: #FFFFFF; display: flex; align-items: center; justify-content: space-between;">
+                <span>Sample Titan Protocol</span>
+                <span style="color: var(--accent-lime); font-size: 0.85rem; font-family: var(--font-mono);">ACTIVE</span>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 12px; font-size: 0.92rem;">
+                <div style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 8px;">
+                  <span style="color: var(--text-muted);">Target Daily Protein:</span>
+                  <strong style="color: var(--accent-lime);">2.2g / kg BW</strong>
+                </div>
+                <div style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 8px;">
+                  <span style="color: var(--text-muted);">Caloric Distribution:</span>
+                  <strong style="color: #FFFFFF;">40P / 40C / 20F</strong>
+                </div>
+                <div style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 8px;">
+                  <span style="color: var(--text-muted);">Hydration Benchmark:</span>
+                  <strong style="color: var(--accent-cyan);">3.8L + Electrolytes</strong>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                  <span style="color: var(--text-muted);">Pre-Workout Fuel:</span>
+                  <strong style="color: var(--accent-orange);">Complex Carbs + EAA</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CLASS TIMETABLE SECTION -->
+    <section class="timetable-section" id="schedule">
+      <div class="container">
+        
+        <div class="section-header">
+          <div class="section-tag">
+            <span class="pulse-dot"></span>
+            <span>Master Coach Schedule</span>
+          </div>
+          <h2>Live Weekly <span class="text-gradient-lime">Class Timetable</span></h2>
+          <p>Led by championship-level coaches. Maximum 12 athletes per session for uncompromising technical focus.</p>
+        </div>
+
+        <!-- Filter Pills -->
+        <div class="day-filters">
+          <button class="day-filter-btn active" data-day="all">All Sessions</button>
+          <button class="day-filter-btn" data-day="mon">Monday</button>
+          <button class="day-filter-btn" data-day="tue">Tuesday</button>
+          <button class="day-filter-btn" data-day="wed">Wednesday</button>
+          <button class="day-filter-btn" data-day="thu">Thursday</button>
+          <button class="day-filter-btn" data-day="fri">Friday</button>
+          <button class="day-filter-btn" data-day="sat">Saturday</button>
+        </div>
+
+        <!-- Schedule Grid -->
+        <div class="schedule-grid">
+          
+          <!-- Card 1 -->
+          <div class="glass-card class-card" data-days="mon wed fri">
+            <div>
+              <span class="class-time">06:30 AM — 07:45 AM</span>
+              <h3 class="class-title">Apex Hyrox Conditioning</h3>
+              <p style="color: var(--text-muted); font-size: 0.92rem;">
+                High-intensity sled pushes, wall balls, skierg intervals, and tactical row intervals.
+              </p>
+            </div>
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; font-size: 0.85rem;">
+                <span style="color: var(--text-sub);">Coach: Marcus Vance</span>
+                <div class="class-intensity-meter">
+                  <span style="color: var(--text-muted); margin-right: 4px; font-size: 0.75rem;">INTENSITY:</span>
+                  <span class="intensity-dot filled"></span>
+                  <span class="intensity-dot filled"></span>
+                  <span class="intensity-dot filled"></span>
+                  <span class="intensity-dot filled"></span>
+                  <span class="intensity-dot filled"></span>
+                </div>
+              </div>
+              <button class="btn-secondary trigger-pass-modal" style="width: 100%; justify-content: center; font-size: 0.88rem; padding: 8px;">Book Free Trial Spot</button>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="glass-card class-card" data-days="mon thu">
+            <div>
+              <span class="class-time">08:00 AM — 09:30 AM</span>
+              <h3 class="class-title">Powerlifting: Squat & Deadlift</h3>
+              <p style="color: var(--text-muted); font-size: 0.92rem;">
+                Heavy bar speed velocity tracking, central nervous system priming, and technical cues.
+              </p>
+            </div>
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; font-size: 0.85rem;">
+                <span style="color: var(--text-sub);">Coach: Sarah Jenkins (IPF Elite)</span>
+                <div class="class-intensity-meter">
+                  <span style="color: var(--text-muted); margin-right: 4px; font-size: 0.75rem;">INTENSITY:</span>
+                  <span class="intensity-dot filled"></span>
+                  <span class="intensity-dot filled"></span>
+                  <span class="intensity-dot filled"></span>
+                  <span class="intensity-dot filled"></span>
+                  <span class="intensity-dot"></span>
+                </div>
+              </div>
+              <button class="btn-secondary trigger-pass-modal" style="width: 100%; justify-content: center; font-size: 0.88rem; padding: 8px;">Book Free Trial Spot</button>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="glass-card class-card" data-days="tue sat">
+            <div>
+              <span class="class-time">10:00 AM — 11:15 AM</span>
+              <h3 class="class-title">Hypertrophy Chest & Shoulder Lab</h3>
+              <p style="color: var(--text-muted); font-size: 0.92rem;">
+                Mechanical tension, lengthened partials, and dropset protocols for maximum delt/pectoral growth.
+              </p>
+            </div>
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; font-size: 0.85rem;">
+                <span style="color: var(--text-sub);">Coach: Leo Sterling</span>
+                <div class="class-intensity-meter">
+                  <span style="color: var(--text-muted); margin-right: 4px; font-size: 0.75rem;">INTENSITY:</span>
+                  <span class="intensity-dot filled"></span>
+                  <span class="intensity-dot filled"></span>
+                  <span class="intensity-dot filled"></span>
+                  <span class="intensity-dot filled"></span>
+                  <span class="intensity-dot"></span>
+                </div>
+              </div>
+              <button class="btn-secondary trigger-pass-modal" style="width: 100%; justify-content: center; font-size: 0.88rem; padding: 8px;">Book Free Trial Spot</button>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="glass-card class-card" data-days="wed sat">
+            <div>
+              <span class="class-time">05:30 PM — 06:45 PM</span>
+              <h3 class="class-title">Olympic Snatch & Clean Mechanics</h3>
+              <p style="color: var(--text-muted); font-size: 0.92rem;">
+                Explosive triple extension, pull under drills, and snatch balance on wooden platforms.
+              </p>
+            </div>
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; font-size: 0.85rem;">
+                <span style="color: var(--text-sub);">Coach: Elena Rostova</span>
+                <div class="class-intensity-meter">
+                  <span style="color: var(--text-muted); margin-right: 4px; font-size: 0.75rem;">INTENSITY:</span>
+                  <span class="intensity-dot filled"></span>
+                  <span class="intensity-dot filled"></span>
+                  <span class="intensity-dot filled"></span>
+                  <span class="intensity-dot filled"></span>
+                  <span class="intensity-dot filled"></span>
+                </div>
+              </div>
+              <button class="btn-secondary trigger-pass-modal" style="width: 100%; justify-content: center; font-size: 0.88rem; padding: 8px;">Book Free Trial Spot</button>
+            </div>
+          </div>
+
+          <!-- Card 5 -->
+          <div class="glass-card class-card" data-days="tue thu fri">
+            <div>
+              <span class="class-time">07:00 PM — 08:00 PM</span>
+              <h3 class="class-title">Titan MetCon Night Burn</h3>
+              <p style="color: var(--text-muted); font-size: 0.92rem;">
+                Heart-rate monitored team circuits utilizing kettlebells, rowers, and core stability chains.
+              </p>
+            </div>
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; font-size: 0.85rem;">
+                <span style="color: var(--text-sub);">Coach: Damon Reed</span>
+                <div class="class-intensity-meter">
+                  <span style="color: var(--text-muted); margin-right: 4px; font-size: 0.75rem;">INTENSITY:</span>
+                  <span class="intensity-dot filled"></span>
+                  <span class="intensity-dot filled"></span>
+                  <span class="intensity-dot filled"></span>
+                  <span class="intensity-dot filled"></span>
+                  <span class="intensity-dot filled"></span>
+                </div>
+              </div>
+              <button class="btn-secondary trigger-pass-modal" style="width: 100%; justify-content: center; font-size: 0.88rem; padding: 8px;">Book Free Trial Spot</button>
+            </div>
+          </div>
+
+          <!-- Card 6 -->
+          <div class="glass-card class-card" data-days="wed fri sat">
+            <div>
+              <span class="class-time">08:15 PM — 09:15 PM</span>
+              <h3 class="class-title">Joint Mobility & Decompression</h3>
+              <p style="color: var(--text-muted); font-size: 0.92rem;">
+                Spine decompression, hip flexor release, breathwork, followed by optional cold plunge contrast.
+              </p>
+            </div>
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; font-size: 0.85rem;">
+                <span style="color: var(--text-sub);">Coach: Maya Chen</span>
+                <div class="class-intensity-meter">
+                  <span style="color: var(--text-muted); margin-right: 4px; font-size: 0.75rem;">INTENSITY:</span>
+                  <span class="intensity-dot filled"></span>
+                  <span class="intensity-dot filled"></span>
+                  <span class="intensity-dot"></span>
+                  <span class="intensity-dot"></span>
+                  <span class="intensity-dot"></span>
+                </div>
+              </div>
+              <button class="btn-secondary trigger-pass-modal" style="width: 100%; justify-content: center; font-size: 0.88rem; padding: 8px;">Book Free Trial Spot</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- MEMBERSHIP TIERS (GLASS BENTO CARDS) -->
+    <section class="pricing-section" id="pricing">
+      <div class="container">
+        
+        <div class="section-header">
+          <div class="section-tag">
+            <span class="pulse-dot"></span>
+            <span>Transparent Pricing</span>
+          </div>
+          <h2>Invest In Your <span class="text-gradient-lime">Physical Capital</span></h2>
+          <p>Zero lock-in contracts. Cancel anytime with 30 days notice. All tiers include full facility locker access.</p>
+        </div>
+
+        <!-- Billing Toggle -->
+        <div class="billing-toggle-wrapper">
+          <span style="font-weight: 600; color: #FFFFFF;">Monthly Billing</span>
+          <div class="billing-switch" id="billingSwitch" title="Toggle monthly / annual"></div>
+          <span style="font-weight: 600; color: var(--accent-lime);">Annual Billing (Save 25%)</span>
+        </div>
+
+        <!-- Bento Grid Pricing Cards -->
+        <div class="bento-grid">
+          
+          <!-- Tier 1: Base Iron -->
+          <div class="glass-card pricing-card col-4">
+            <div style="font-size: 1.2rem; font-weight: 700; color: var(--text-sub);">BASE IRON</div>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 4px;">For self-directed lifters who just need calibrated steel.</p>
+            
+            <div class="price-display">
+              <span class="price-currency">$</span>
+              <span class="price-amount">49</span>
+              <span class="price-period">/ month</span>
+            </div>
+
+            <ul class="pricing-feature-list">
+              <li class="pricing-feature-item"><span class="check">✓</span> 24/7 Keyless Biometric Access</li>
+              <li class="pricing-feature-item"><span class="check">✓</span> Heavy Iron & Free Weight Zones</li>
+              <li class="pricing-feature-item"><span class="check">✓</span> Luxury Locker Rooms & Showers</li>
+              <li class="pricing-feature-item"><span class="check">✓</span> Access to Digital Diet Guide</li>
+              <li class="pricing-feature-item" style="color: var(--text-muted); opacity: 0.5;">✕ Recovery Lab (Cold Plunge & Sauna)</li>
+              <li class="pricing-feature-item" style="color: var(--text-muted); opacity: 0.5;">✕ Unlimited Coach-Led Classes</li>
+            </ul>
+
+            <a href="contact.html?plan=base" class="btn-secondary" style="width: 100%; justify-content: center; margin-top: auto;">Select Base Iron</a>
+          </div>
+
+          <!-- Tier 2: Apex Athlete (FEATURED GLOW) -->
+          <div class="glass-card pricing-card col-4 featured glass-card-glow-lime">
+            <div class="popular-badge">⚡ MOST POPULAR</div>
+            <div style="font-size: 1.2rem; font-weight: 800; color: var(--accent-lime);">APEX ATHLETE</div>
+            <p style="color: var(--text-sub); font-size: 0.9rem; margin-top: 4px;">Complete strength, recovery, and conditioning synergy.</p>
+            
+            <div class="price-display">
+              <span class="price-currency" style="color: var(--accent-lime);">$</span>
+              <span class="price-amount" style="color: #FFFFFF;">89</span>
+              <span class="price-period">/ month</span>
+            </div>
+
+            <ul class="pricing-feature-list">
+              <li class="pricing-feature-item"><span class="check">✓</span> <strong>Everything in Base Iron</strong></li>
+              <li class="pricing-feature-item"><span class="check">✓</span> Unlimited Cryo-Plunge & Finnish Sauna</li>
+              <li class="pricing-feature-item"><span class="check">✓</span> Unlimited Masterclass Group Sessions</li>
+              <li class="pricing-feature-item"><span class="check">✓</span> Custom Macro & Diet Plan Review</li>
+              <li class="pricing-feature-item"><span class="check">✓</span> 2 Free Guest Passes / Month</li>
+              <li class="pricing-feature-item"><span class="check">✓</span> 15% Off at Apex Fuel & Protein Bar</li>
+            </ul>
+
+            <a href="contact.html?plan=athlete" class="btn-primary" style="width: 100%; justify-content: center; margin-top: auto;">Join As Apex Athlete</a>
+          </div>
+
+          <!-- Tier 3: Titan Black Elite -->
+          <div class="glass-card pricing-card col-4">
+            <div style="font-size: 1.2rem; font-weight: 700; color: var(--accent-orange);">TITAN BLACK ELITE</div>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 4px;">The absolute VIP standard. Personal coaching included.</p>
+            
+            <div class="price-display">
+              <span class="price-currency">$</span>
+              <span class="price-amount">149</span>
+              <span class="price-period">/ month</span>
+            </div>
+
+            <ul class="pricing-feature-list">
+              <li class="pricing-feature-item"><span class="check">✓</span> <strong>Everything in Apex Athlete</strong></li>
+              <li class="pricing-feature-item"><span class="check">✓</span> 2 Monthly 1-on-1 Personal Training Hours</li>
+              <li class="pricing-feature-item"><span class="check">✓</span> Personalized Registered Dietitian Consult</li>
+              <li class="pricing-feature-item"><span class="check">✓</span> Dedicated Private Locker & Laundry Service</li>
+              <li class="pricing-feature-item"><span class="check">✓</span> Unlimited VIP Guest Passes</li>
+              <li class="pricing-feature-item"><span class="check">✓</span> Monthly InBody 770 Body Comp Scans</li>
+            </ul>
+
+            <a href="contact.html?plan=elite" class="btn-secondary" style="width: 100%; justify-content: center; margin-top: auto;">Select Black Elite</a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ATHLETE REVIEWS & SOCIAL PROOF -->
+    <section style="padding: 60px 0;">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">
+            <span class="pulse-dot"></span>
+            <span>Real Results</span>
+          </div>
+          <h2>Forged In <span class="text-gradient-lime">Our Community</span></h2>
+          <p>Over 850+ active athletes crushing personal records and life-changing health metrics.</p>
+        </div>
+
+        <div class="bento-grid">
+          
+          <div class="glass-card bento-item col-4">
+            <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 16px;">
+              <div style="width: 50px; height: 50px; border-radius: 50%; background: var(--accent-lime); color: #07090E; font-weight: 900; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">
+                DK
+              </div>
+              <div>
+                <div style="font-weight: 700; color: #FFFFFF;">David K.</div>
+                <div style="font-size: 0.82rem; color: var(--accent-lime);">Lost 32 lbs & Added 80 lbs to Deadlift</div>
+              </div>
+            </div>
+            <p style="color: var(--text-sub); font-size: 0.95rem; line-height: 1.6;">
+              "Following the Titan Shred diet plan alongside the heavy platforms transformed my physique completely in 4 months. The cold plunge afterwards is addictive."
+            </p>
+            <div style="margin-top: 18px; color: var(--accent-lime); font-size: 0.9rem;">★★★★★ Verified Member</div>
+          </div>
+
+          <div class="glass-card bento-item col-4">
+            <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 16px;">
+              <div style="width: 50px; height: 50px; border-radius: 50%; background: var(--accent-cyan); color: #07090E; font-weight: 900; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">
+                MR
+              </div>
+              <div>
+                <div style="font-weight: 700; color: #FFFFFF;">Maria R.</div>
+                <div style="font-size: 0.82rem; color: var(--accent-cyan);">Hyrox Competitor</div>
+              </div>
+            </div>
+            <p style="color: var(--text-sub); font-size: 0.95rem; line-height: 1.6;">
+              "Best facility in the state hands down. The turf track, calibrated plates, and the recovery sauna make this a haven for anyone serious about high performance."
+            </p>
+            <div style="margin-top: 18px; color: var(--accent-cyan); font-size: 0.9rem;">★★★★★ Verified Member</div>
+          </div>
+
+          <div class="glass-card bento-item col-4">
+            <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 16px;">
+              <div style="width: 50px; height: 50px; border-radius: 50%; background: var(--accent-orange); color: #07090E; font-weight: 900; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">
+                JT
+              </div>
+              <div>
+                <div style="font-weight: 700; color: #FFFFFF;">James T.</div>
+                <div style="font-size: 0.82rem; color: var(--accent-orange);">Powerlifter & Entrepreneur</div>
+              </div>
+            </div>
+            <p style="color: var(--text-sub); font-size: 0.95rem; line-height: 1.6;">
+              "The 24/7 keyless access fits my crazy business schedule. I can lift at 5:00 AM without crowds, grab a pre-made macro meal, and hit my meetings ready to conquer."
+            </p>
+            <div style="margin-top: 18px; color: var(--accent-orange); font-size: 0.9rem;">★★★★★ Verified Member</div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- VIP DAY PASS MODAL (INTERACTIVE GENERATOR) -->
+  <div class="modal-backdrop" id="passModal">
+    <div class="modal-dialog">
+      
+      <!-- Modal Form State -->
+      <div class="glass-card" id="vipPassForm" style="padding: 40px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px;">
+          <div>
+            <div class="section-tag" style="margin-bottom: 8px;">VIP Invitation</div>
+            <h3 style="font-size: 1.8rem;">Claim Free 1-Day Pass</h3>
+          </div>
+          <button class="close-modal-btn" style="background: none; border: none; color: #FFFFFF; font-size: 1.5rem; cursor: pointer;">✕</button>
+        </div>
+        <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 24px;">
+          Test drive all 15,000 sq ft, our cold plunge recovery tubs, and a masterclass with zero obligations.
+        </p>
+
+        <form id="passFormElement" style="display: flex; flex-direction: column; gap: 16px;">
+          <div class="form-group">
+            <label for="guestName">Full Name</label>
+            <input type="text" id="guestName" class="glass-input" placeholder="e.g. Alex Mercer" required>
+          </div>
+          <div class="form-group">
+            <label for="guestEmail">Email Address</label>
+            <input type="email" id="guestEmail" class="glass-input" placeholder="alex@domain.com" required>
+          </div>
+          <div class="form-group">
+            <label for="guestPhone">Phone Number</label>
+            <input type="tel" id="guestPhone" class="glass-input" placeholder="+1 (555) 000-0000" required>
+          </div>
+          
+          <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; margin-top: 10px;">
+            <span>Generate Digital VIP Pass</span>
+            <span>⚡</span>
+          </button>
+        </form>
+      </div>
+
+      <!-- Generated Ticket View (Hidden initially) -->
+      <div id="passTicketView" style="display: none;">
+        <div class="digital-pass-card">
+          <div class="pass-notch-left"></div>
+          <div class="pass-notch-right"></div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <div class="brand-logo">
+              <div class="brand-icon-badge" style="width: 32px; height: 32px; font-size: 0.9rem;">⚡</div>
+              <div class="brand-text" style="font-size: 1.1rem;">APEX<span>TITAN</span></div>
+            </div>
+            <span class="section-tag" style="margin-bottom: 0;">1-DAY VIP PASS</span>
+          </div>
+
+          <div style="margin: 24px 0;">
+            <div style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">Pass Holder</div>
+            <div id="ticketHolderName" style="font-family: var(--font-display); font-size: 1.6rem; font-weight: 800; color: #FFFFFF;">
+              Alex Mercer
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px;">
+            <div>
+              <div style="font-size: 0.8rem; color: var(--text-muted);">Pass ID</div>
+              <div id="ticketIdDisplay" style="font-family: var(--font-mono); color: var(--accent-lime); font-weight: 700;">APX-847291</div>
+            </div>
+            <div>
+              <div style="font-size: 0.8rem; color: var(--text-muted);">Valid Until</div>
+              <div id="ticketValidDate" style="font-family: var(--font-mono); color: #FFFFFF; font-weight: 700;">Oct 28, 2026</div>
+            </div>
+          </div>
+
+          <div class="pass-barcode-area">
+            <div style="font-size: 0.75rem; color: var(--text-muted); letter-spacing: 0.1em;">SCAN AT FRONT CONCIERGE DESK</div>
+            <div class="simulated-barcode"></div>
+            <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted);">*APEX-TITAN-VIP-ALL-ACCESS*</div>
+          </div>
+
+          <div style="display: flex; gap: 12px; margin-top: 24px;">
+            <button id="printPassBtn" class="btn-primary" style="flex: 1; justify-content: center;">
+              <span>Save / Print Pass</span>
+              <span>🖨️</span>
+            </button>
+            <button onclick="document.getElementById('passModal').classList.remove('active')" class="btn-secondary" style="flex: 1; justify-content: center;">
+              Done
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- GLASS FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bento">
+        
+        <div class="footer-brand">
+          <a href="index.html" class="brand-logo">
+            <div class="brand-icon-badge">⚡</div>
+            <div class="brand-text">APEX<span>TITAN</span></div>
+          </a>
+          <p>
+            An uncompromising fitness and physical performance sanctum designed to forge resilience, strength, and biological longevity.
+          </p>
+          <div style="display: flex; gap: 12px; margin-top: 18px;">
+            <span class="glass-pill" style="font-size: 0.8rem;">📍 742 Iron Forge Blvd</span>
+            <span class="glass-pill" style="font-size: 0.8rem; color: var(--accent-lime);">24/7 Access</span>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home Overview</a></li>
+            <li><a href="diet.html">Interactive Diet Plans</a></li>
+            <li><a href="diet.html#calculator">Macro Calculator</a></li>
+            <li><a href="#schedule">Class Timetable</a></li>
+            <li><a href="#pricing">Membership Tiers</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Protocols & Tech</h4>
+          <ul class="footer-links">
+            <li><a href="diet.html#shred">The Titan Shred</a></li>
+            <li><a href="diet.html#hypertrophy">Mass Hypertrophy</a></li>
+            <li><a href="diet.html#plant">Plant-Powered Beast</a></li>
+            <li><a href="#facilities">Cold Plunge & Cryo</a></li>
+            <li><a href="#facilities">Biomechanical Iron</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Direct Concierge</h4>
+          <ul class="footer-links">
+            <li><a href="contact.html">Schedule Facility Tour</a></li>
+            <li><a href="tel:+18005554766">Direct Line: (800) 555-IRON</a></li>
+            <li><a href="mailto:concierge@apextitan.com">concierge@apextitan.com</a></li>
+            <li><a href="contact.html#hours">Staffed Hours & FAQ</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <div>© 2026 Apex Titan Fitness & Performance LLC. All Rights Reserved. Built with Pentogrid & Glassmorphic Precision.</div>
+        <div style="display: flex; gap: 20px;">
+          <a href="diet.html" style="color: var(--text-muted); text-decoration: none;">Nutrition Disclaimer</a>
+          <a href="contact.html" style="color: var(--text-muted); text-decoration: none;">Privacy Policy</a>
+          <a href="contact.html" style="color: var(--text-muted); text-decoration: none;">Terms of Membership</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/app.js"></script>
+</body>
+</html>
