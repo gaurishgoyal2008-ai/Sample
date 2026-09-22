@@ -17,5 +17,8 @@
     "vercel"
   ],
   "author": "Apex Titan Athletics",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.117.0"
+  }
 }

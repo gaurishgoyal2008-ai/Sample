@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initPassModal();
   initContactForm();
   initFaqAccordion();
+  initGoogleAuth();
 });
 
 /* ==========================================================================
@@ -420,4 +421,107 @@ function initFaqAccordion() {
       }
     });
   });
+}
+/* ==========================================================================
+   SUPABASE GOOGLE AUTHENTICATION
+   ========================================================================== */
+
+function initGoogleAuth() {
+  const googleLoginBtn = document.getElementById('googleLoginBtn');
+  const logoutBtn = document.getElementById('logoutBtn');
+  const userProfile = document.getElementById('userProfile');
+  const userAvatar = document.getElementById('userAvatar');
+  const userName = document.getElementById('userName');
+
+  // Google Login
+  if (googleLoginBtn) {
+    googleLoginBtn.addEventListener('click', async () => {
+      const { error } = await supabaseClient.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: window.location.origin
+        }
+      });
+
+      if (error) {
+        console.error('Google login error:', error);
+        showToast('Google login failed.', '✕');
+      }
+    });
+  }
+
+  // Logout
+  if (logoutBtn) {
+    logoutBtn.addEventListener('click', async () => {
+      const { error } = await supabaseClient.auth.signOut();
+
+      if (error) {
+        console.error('Logout error:', error);
+        showToast('Logout failed.', '✕');
+        return;
+      }
+
+      updateAuthUI(null);
+      showToast('Logged out successfully.');
+    });
+  }
+
+  // Check whether the user is already logged in
+  supabaseClient.auth.getSession().then(({ data }) => {
+    updateAuthUI(data.session);
+  });
+
+  // Detect login/logout changes
+  supabaseClient.auth.onAuthStateChange((event, session) => {
+    updateAuthUI(session);
+  });
+
+
+  function updateAuthUI(session) {
+    if (session && session.user) {
+      const user = session.user;
+
+      const name =
+        user.user_metadata?.full_name ||
+        user.user_metadata?.name ||
+        user.email ||
+        'Member';
+
+      const avatar =
+        user.user_metadata?.avatar_url ||
+        user.user_metadata?.picture ||
+        '';
+
+      if (userName) {
+        userName.textContent = name;
+      }
+
+      if (userAvatar) {
+        if (avatar) {
+          userAvatar.src = avatar;
+          userAvatar.style.display = 'block';
+        } else {
+          userAvatar.style.display = 'none';
+        }
+      }
+
+      if (googleLoginBtn) {
+        googleLoginBtn.style.display = 'none';
+      }
+
+      if (userProfile) {
+        userProfile.style.display = 'flex';
+      }
+
+    } else {
+
+      if (googleLoginBtn) {
+        googleLoginBtn.style.display = 'inline-flex';
+      }
+
+      if (userProfile) {
+        userProfile.style.display = 'none';
+      }
+    }
+  }
 }
