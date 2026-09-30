@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#070a10" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>VisionAI Mobile — Wireless Camera Transmitter</title>
+  <meta name="description" content="Ultra-low latency wireless camera sensor transmitter for VisionAI Laptop Command Center." />
+
+  <!-- Google Fonts: Outfit, Inter, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body class="dark-theme phone-body">
+  <div class="phone-app-container">
+    
+    <!-- Phone Top Status HUD -->
+    <header class="phone-hud-header">
+      <div class="phone-brand-tag">
+        <span class="phone-pulse-dot"></span>
+        <span class="phone-brand-title">VISION<span class="accent-cyan">·AI</span> <span class="phone-badge">TRANSMITTER</span></span>
+      </div>
+      
+      <div class="phone-status-pill" id="phone-status-pill">
+        <span class="status-indicator-dot" id="phone-status-dot"></span>
+        <span id="phone-status-text">INITIALIZING...</span>
+      </div>
+
+      <div class="phone-room-pill" id="phone-room-pill" title="Tap to switch room">
+        <span class="mono-label">ROOM:</span>
+        <span id="phone-room-display" class="mono-val">------</span>
+      </div>
+    </header>
+
+    <!-- Phone Viewfinder Area -->
+    <main class="phone-viewfinder-wrapper">
+      <video id="phone-video" playsinline autoplay muted></video>
+      
+      <!-- High-tech Viewfinder Overlay -->
+      <div class="phone-reticle-overlay">
+        <div class="phone-bracket top-left"></div>
+        <div class="phone-bracket top-right"></div>
+        <div class="phone-bracket bottom-left"></div>
+        <div class="phone-bracket bottom-right"></div>
+        <div class="phone-crosshair-center"></div>
+
+        <!-- Telemetry feedback banner received from Laptop's AI brain -->
+        <div class="phone-laptop-feedback" id="phone-laptop-feedback">
+          <div class="feedback-pulse-ring"></div>
+          <div class="feedback-content">
+            <div class="feedback-title" id="feedback-title">LAPTOP AI SYNC ACTIVE</div>
+            <div class="feedback-detail" id="feedback-detail">Point camera steadily at objects</div>
+          </div>
+        </div>
+
+        <!-- Floating Sensor Badge -->
+        <div class="phone-sensor-badge" id="phone-sensor-badge">
+          <span id="phone-sensor-name">REAR CAMERA</span> · <span id="phone-fps-display">30 FPS</span>
+        </div>
+      </div>
+
+      <!-- Permission / Loading Banner -->
+      <div class="phone-overlay-message" id="phone-overlay-message">
+        <div class="spinner"></div>
+        <h3 id="phone-overlay-title">Starting Phone Camera...</h3>
+        <p id="phone-overlay-desc">Please tap "Allow" when your browser requests camera access.</p>
+        <button id="phone-btn-grant-cam" class="btn-primary" style="display: none; margin-top: 16px;">
+          Enable Camera Access
+        </button>
+      </div>
+
+      <!-- Manual Room Connect Modal -->
+      <div class="phone-modal-backdrop" id="phone-room-modal" style="display: none;">
+        <div class="phone-modal-card">
+          <div class="phone-modal-header">
+            <h3>🔗 Connect to Laptop</h3>
+          </div>
+          <p class="phone-modal-sub">
+            Enter the 6-character room code displayed on your laptop screen:
+          </p>
+          <div class="room-input-group">
+            <input type="text" id="manual-room-input" placeholder="e.g. V-8492" maxlength="12" class="room-code-input" autocomplete="off" autocorrect="off" autocapitalize="characters" />
+            <button id="btn-submit-room" class="btn-primary">Connect</button>
+          </div>
+          <div class="phone-modal-actions">
+            <button id="btn-cancel-room-modal" class="btn-secondary">Cancel</button>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- Phone Bottom Control Bar -->
+    <footer class="phone-bottom-controls">
+      <button id="phone-btn-flip" class="phone-action-btn" title="Flip Camera">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M20 16v5a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-5"/>
+          <polyline points="4 8 8 4 12 8"/>
+          <line x1="8" y1="4" x2="8" y2="16"/>
+          <polyline points="20 16 16 20 12 16"/>
+        </svg>
+        <span>Flip</span>
+      </button>
+
+      <button id="phone-btn-torch" class="phone-action-btn" title="Toggle Flashlight / Torch">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+        </svg>
+        <span>Torch</span>
+      </button>
+
+      <button id="phone-btn-quality" class="phone-action-btn" title="Toggle 1080p / 720p Quality">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="2" y="7" width="20" height="15" rx="2" ry="2"/>
+          <polyline points="17 2 12 7 7 2"/>
+        </svg>
+        <span id="quality-label">1080p</span>
+      </button>
+
+      <button id="phone-btn-reconnect" class="phone-action-btn" title="Reconnect to Laptop">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="23 4 23 10 17 10"/>
+          <polyline points="1 20 1 14 7 14"/>
+          <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+        </svg>
+        <span>Relink</span>
+      </button>
+    </footer>
+
+    <!-- Mobile Toast -->
+    <div id="phone-toast-container" class="phone-toast-container"></div>
+  </div>
+
+  <script type="module" src="/src/phone.js"></script>
+</body>
+</html>

@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#0a0e17" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>VisionAI — Neural Camera & AI Observation Reporter</title>
+  <meta name="description" content="Real-time mobile camera object detection, spatial tracking, dwell-time telemetry, and structured AI observation reports." />
+
+  <!-- Google Fonts: Outfit, Inter, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body class="dark-theme">
+  <div id="app-container" class="app-container">
+    
+    <!-- Top Navigation & Telemetry HUD -->
+    <header class="hud-header" id="hud-header">
+      <div class="brand-section">
+        <div class="brand-logo-badge">
+          <span class="pulse-indicator"></span>
+          <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+            <circle cx="12" cy="13" r="4"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h1 class="brand-title">VISION<span class="accent-cyan">·AI</span></h1>
+          <p class="brand-subtitle">Smart Camera &amp; AI Reporter</p>
+        </div>
+      </div>
+
+      <!-- Live Telemetry Badges -->
+      <div class="telemetry-bar">
+        <div class="telemetry-pill live-pill" id="live-indicator">
+          <span class="live-dot" id="live-dot"></span>
+          <span id="live-status-text">PHONE: WAITING...</span>
+        </div>
+        <div class="telemetry-pill time-pill" id="telemetry-clock">
+          <svg class="pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12 6 12 12 16 14"/>
+          </svg>
+          <span id="clock-display">00:00:00</span>
+        </div>
+        <div class="telemetry-pill fps-pill" id="telemetry-fps">
+          <span id="fps-display">-- FPS</span>
+        </div>
+      </div>
+
+      <!-- Quick Action Controls -->
+      <div class="header-actions">
+        <button id="btn-mobile-connect" class="hud-btn highlight-btn" title="Phone Camera Link & QR Code">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+            <line x1="12" y1="18" x2="12.01" y2="18"/>
+          </svg>
+          <span class="btn-label-desktop">Phone Link</span>
+          <span class="phone-link-status-badge" id="phone-link-header-status">PAIRING</span>
+        </button>
+
+        <button id="btn-toggle-speech" class="hud-btn" title="Toggle Spoken Object Announcements">
+          <svg id="icon-speech-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
+          </svg>
+          <span class="btn-label-desktop">Voice</span>
+        </button>
+
+        <button id="btn-flip-camera" class="hud-btn" title="Flip Camera (Front/Rear)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 16v5a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-5"/>
+            <polyline points="4 8 8 4 12 8"/>
+            <line x1="8" y1="4" x2="8" y2="16"/>
+            <polyline points="20 16 16 20 12 16"/>
+          </svg>
+          <span class="btn-label-desktop">Flip</span>
+        </button>
+
+        <button id="btn-open-report" class="hud-btn btn-highlight" title="Open Camera Observations Report">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="16" y1="13" x2="8" y2="13"/>
+            <line x1="16" y1="17" x2="8" y2="17"/>
+            <polyline points="10 9 9 9 8 9"/>
+          </svg>
+          <span>Report</span>
+          <span id="tracked-badge" class="badge-count">0</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Viewfinder Section -->
+    <main class="viewfinder-section" id="viewfinder-section">
+      <div class="viewfinder-container" id="viewfinder-container">
+        <!-- Hidden video element that streams the phone/webcam feed -->
+        <video id="camera-video" playsinline autoplay muted></video>
+
+        <!-- Canvas for rendering video frame + AR HUD Bounding Boxes + Reticle -->
+        <canvas id="hud-canvas"></canvas>
+
+        <!-- Centered Target Pointer / Reticle -->
+        <div class="reticle-overlay" id="reticle-overlay">
+          <div class="reticle-crosshair" id="reticle-crosshair">
+            <div class="reticle-circle"></div>
+            <div class="reticle-line h-line"></div>
+            <div class="reticle-line v-line"></div>
+            <div class="reticle-bracket top-left"></div>
+            <div class="reticle-bracket top-right"></div>
+            <div class="reticle-bracket bottom-left"></div>
+            <div class="reticle-bracket bottom-right"></div>
+          </div>
+
+          <!-- Targeted Object Announcement Banner (Updates when pointing phone at an object) -->
+          <div class="target-card" id="target-card">
+            <div class="target-card-header">
+              <span class="target-radar-ping"></span>
+              <span class="target-status-label" id="target-status-label">POINTING AT TARGET</span>
+            </div>
+            <div class="target-card-body">
+              <div class="target-primary-info">
+                <span class="target-class-name" id="target-class-name">Aim phone camera at object</span>
+                <span class="target-id-badge" id="target-id-badge">ID: --</span>
+              </div>
+              <div class="target-meta-info" id="target-meta-info">
+                <span id="target-confidence">Ready</span>
+                <span class="separator">·</span>
+                <span id="target-dwell">Dwell: 0s</span>
+                <span class="separator">·</span>
+                <span id="target-motion">Aim center</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Phone Camera Pairing HUD Overlay (Shown when waiting for Phone Camera Stream) -->
+        <div class="phone-pairing-card" id="phone-pairing-card">
+          <div class="pairing-card-header">
+            <div class="pairing-title-group">
+              <div class="pairing-badge-row">
+                <span class="pairing-mode-tag">
+                  <span class="pairing-pulse-dot"></span>
+                  PRIMARY SENSOR
+                </span>
+                <span class="mono-label" style="font-size: 0.72rem; color: var(--text-muted);">ZERO LATENCY WebRTC</span>
+              </div>
+              <h2 class="pairing-title">📱 Connect Your Phone Camera</h2>
+              <p class="pairing-subtitle">
+                Stream live high-definition video from your phone's camera directly to this laptop screen. All neural AI detection, tracking telemetry, and observation reporting run right here.
+              </p>
+            </div>
+          </div>
+
+          <div class="pairing-card-body">
+            <!-- Left: QR Code Box -->
+            <div class="pairing-qr-section">
+              <div class="pairing-qr-box">
+                <canvas id="pairing-qr-canvas"></canvas>
+              </div>
+              <span class="qr-caption">📷 Point phone camera to scan</span>
+            </div>
+
+            <!-- Right: Code and Link Details -->
+            <div class="pairing-info-section">
+              <div class="pairing-code-box">
+                <div>
+                  <div class="code-meta-label">ROOM PAIRING CODE</div>
+                  <div class="pairing-code-val" id="pairing-code-val">------</div>
+                </div>
+                <div style="text-align: right;">
+                  <span class="status-indicator-dot" style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--amber-400); animation: pulseBeacon 1s infinite;"></span>
+                  <span style="font-size: 0.75rem; color: var(--amber-400); font-weight: 600; display: block; margin-top: 4px;">WAITING</span>
+                </div>
+              </div>
+
+              <div class="pairing-url-row">
+                <input type="text" id="pairing-url-input" class="pairing-url-input" readonly value="" />
+                <button id="btn-copy-pairing-url" class="btn-sm-primary">Copy Link</button>
+              </div>
+
+              <ul class="pairing-steps-list">
+                <li>1. Ensure phone &amp; laptop are on same Wi-Fi (or public tunnel/Vercel URL).</li>
+                <li>2. Scan the QR code or open the link on your mobile browser (Safari/Chrome).</li>
+                <li>3. Tap <strong>Allow</strong> on your phone — the live video feed will appear right here!</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="pairing-card-footer">
+            <div class="pairing-quick-actions">
+              <button id="btn-open-virtual-phone" class="btn-sm-secondary" title="Test dual-screen phone streaming in side-by-side browser window">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+                  <line x1="12" y1="18" x2="12.01" y2="18"/>
+                </svg>
+                <span>Open Virtual Phone Window (Side-by-Side Test)</span>
+              </button>
+              <button id="btn-quick-sim" class="btn-sm-ghost" title="Try synthetic simulation stream">
+                ⚡ Try Simulation Feed
+              </button>
+              <button id="btn-use-laptop-cam" class="btn-sm-ghost" title="Fall back to laptop webcam">
+                💻 Switch to Laptop Webcam
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Floating Phone Connected Badge (Shown when Phone Camera is actively streaming) -->
+        <div class="phone-connected-floating-pill" id="phone-connected-pill" style="display: none;">
+          <span class="connected-dot"></span>
+          <span class="phone-connected-text" id="phone-connected-text">PHONE CAMERA STREAMING (1080p)</span>
+          <button id="btn-manage-phone" class="mini-text-btn">Manage</button>
+        </div>
+
+        <!-- Camera Loading / Permission Banner -->
+        <div class="viewfinder-overlay-message" id="overlay-message" style="display: none;">
+          <div class="spinner"></div>
+          <p id="overlay-message-text">Initializing AI Model...</p>
+          <div class="overlay-actions" id="overlay-actions" style="display: none;">
+            <button id="btn-request-cam" class="btn-primary">Enable Camera</button>
+            <button id="btn-fallback-sim" class="btn-secondary">Use Simulation Mode</button>
+          </div>
+        </div>
+
+        <!-- Watermark / HUD Corner Data -->
+        <div class="hud-corner-data top-left-data">
+          <span class="mono-label">FEED:</span> <span id="feed-source-name" class="mono-value">PHONE SENSOR (REMOTE)</span>
+        </div>
+        <div class="hud-corner-data top-right-data">
+          <span class="mono-label">MODEL:</span> <span class="mono-value">COCO-SSD v2</span>
+        </div>
+        <div class="hud-corner-data bottom-left-data">
+          <span class="mono-label">TOTAL TRACKED:</span> <span id="hud-total-tracked" class="mono-value">0</span>
+        </div>
+        <div class="hud-corner-data bottom-right-data">
+          <span class="mono-label">ACTIVE:</span> <span id="hud-active-count" class="mono-value text-emerald">0</span>
+        </div>
+      </div>
+
+      <!-- Bottom Floating Viewfinder Controls -->
+      <nav class="viewfinder-controls" id="viewfinder-controls">
+        <div class="feed-mode-tabs" role="tablist">
+          <button id="tab-mode-phone" class="mode-tab active" role="tab" aria-selected="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+              <line x1="12" y1="18" x2="12.01" y2="18"/>
+            </svg>
+            <span>📱 Phone Camera</span>
+          </button>
+          <button id="tab-mode-sim" class="mode-tab" role="tab" aria-selected="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="5 3 19 12 5 21 5 3"/>
+            </svg>
+            <span>⚡ Simulation</span>
+          </button>
+          <button id="tab-mode-webcam" class="mode-tab" role="tab" aria-selected="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+              <circle cx="12" cy="13" r="4"/>
+            </svg>
+            <span>💻 Laptop Webcam</span>
+          </button>
+          <button id="tab-mode-upload" class="mode-tab" role="tab" aria-selected="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+              <circle cx="8.5" cy="8.5" r="1.5"/>
+              <polyline points="21 15 16 10 5 21"/>
+            </svg>
+            <span>📁 Photo / Upload</span>
+          </button>
+          <input type="file" id="image-upload-input" accept="image/*,video/*" style="display: none;" />
+        </div>
+
+        <div class="action-buttons-group">
+          <button id="btn-snapshot" class="control-circle-btn" title="Capture AR Snapshot">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <circle cx="12" cy="12" r="4" fill="currentColor"/>
+            </svg>
+            <span class="btn-subtext">Snap</span>
+          </button>
+
+          <button id="btn-generate-report-cta" class="cta-report-btn" title="Generate AI Observation Report">
+            <div class="cta-btn-icon-wrapper">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="16" y1="13" x2="8" y2="13"/>
+                <line x1="16" y1="17" x2="8" y2="17"/>
+              </svg>
+            </div>
+            <div class="cta-btn-text">
+              <span class="cta-title">Generate AI Report</span>
+              <span class="cta-subtitle">Summarize Observations</span>
+            </div>
+          </button>
+
+          <button id="btn-reset-session" class="control-circle-btn danger-hover" title="Reset Session Tracker">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="1 4 1 10 7 10"/>
+              <polyline points="23 20 23 14 17 14"/>
+              <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/>
+            </svg>
+            <span class="btn-subtext">Reset</span>
+          </button>
+        </div>
+      </nav>
+    </main>
+
+    <!-- AI OBSERVATIONS REPORT MODAL / DRAWER (Matches exact user specification) -->
+    <div class="modal-backdrop" id="report-modal" style="display: none;">
+      <div class="report-dialog" id="report-dialog">
+        <!-- Report Dialog Header -->
+        <div class="report-header">
+          <div class="report-header-left">
+            <div class="report-icon-tag">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="16" y1="13" x2="8" y2="13"/>
+                <line x1="16" y1="17" x2="8" y2="17"/>
+              </svg>
+            </div>
+            <div>
+              <h2 class="report-modal-title" id="report-modal-title">Camera Report — 28 September 2026</h2>
+              <p class="report-modal-subtitle">AI-Assisted Spatial Tracking &amp; Observation Audit</p>
+            </div>
+          </div>
+          <button id="btn-close-report" class="close-modal-btn" aria-label="Close Report">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"/>
+              <line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+          </button>
+        </div>
+
+        <!-- KPI Metrics Ribbon -->
+        <div class="report-kpi-grid">
+          <div class="kpi-card">
+            <span class="kpi-label">TOTAL OBJECTS</span>
+            <span class="kpi-value" id="kpi-total">0</span>
+            <span class="kpi-caption">Unique IDs assigned</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-label">ACTIVE IN VIEW</span>
+            <span class="kpi-value text-emerald" id="kpi-active">0</span>
+            <span class="kpi-caption">Currently visible</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-label">DEPARTED</span>
+            <span class="kpi-value text-slate" id="kpi-departed">0</span>
+            <span class="kpi-caption">Vacated frame</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-label">AVG VISIBILITY</span>
+            <span class="kpi-value text-cyan" id="kpi-avg-duration">0 sec</span>
+            <span class="kpi-caption">Dwell time per object</span>
+          </div>
+        </div>
+
+        <!-- Format Selector Tabs (Visual, Exact Text, Markdown, JSON, CSV) -->
+        <div class="format-tabs-bar">
+          <div class="format-tabs-list" role="tablist">
+            <button id="tab-format-visual" class="format-tab active" role="tab">Visual Dashboard</button>
+            <button id="tab-format-text" class="format-tab" role="tab">Standard Text (Required Format)</button>
+            <button id="tab-format-markdown" class="format-tab" role="tab">Markdown</button>
+            <button id="tab-format-json" class="format-tab" role="tab">Structured JSON</button>
+            <button id="tab-format-csv" class="format-tab" role="tab">CSV</button>
+          </div>
+          <div class="report-quick-exports">
+            <button id="btn-copy-report" class="action-pill-btn" title="Copy Current Report Content">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+              </svg>
+              <span>Copy</span>
+            </button>
+            <button id="btn-download-report" class="action-pill-btn" title="Download Report File">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+              <span>Download</span>
+            </button>
+            <button id="btn-print-report" class="action-pill-btn" title="Print / Save PDF">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 6 2 18 2 18 9"/>
+                <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+                <rect x="6" y="14" width="12" height="8"/>
+              </svg>
+              <span>Print / PDF</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Tab 1: Visual Interactive View -->
+        <div id="view-format-visual" class="format-view-panel active">
+          <!-- Structured Observations Table -->
+          <div class="table-container">
+            <table class="report-table" id="visual-report-table">
+              <thead>
+                <tr>
+                  <th>Object</th>
+                  <th>Tracking ID</th>
+                  <th>First Detected</th>
+                  <th>Last Detected</th>
+                  <th>Duration</th>
+                  <th>Status</th>
+                  <th>Movement / Events</th>
+                </tr>
+              </thead>
+              <tbody id="visual-table-body">
+                <!-- Dynamically populated rows -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- AI Summary Interactive Card -->
+          <div class="ai-summary-card">
+            <div class="ai-summary-header">
+              <div class="ai-badge-group">
+                <span class="ai-sparkle-icon">✨</span>
+                <span class="ai-summary-label">AI Summary</span>
+              </div>
+              <div class="summary-style-controls">
+                <label for="summary-style-select">Style:</label>
+                <select id="summary-style-select" class="hud-select">
+                  <option value="standard" selected>Standard (Example Format)</option>
+                  <option value="executive">Executive Surveillance</option>
+                  <option value="security">Security &amp; Ingress Audit</option>
+                </select>
+                <button id="btn-speak-summary" class="mini-icon-btn" title="Read Summary Aloud">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div class="ai-summary-body" id="visual-ai-summary-text">
+              Generating summary...
+            </div>
+            <div class="ai-summary-footer">
+              <button id="btn-toggle-gemini-input" class="text-link-btn">
+                <span>Configure Custom Gemini API Key</span>
+              </button>
+              <div id="gemini-key-container" class="gemini-input-row" style="display: none;">
+                <input type="password" id="gemini-api-key" placeholder="Enter Google Gemini API Key" class="hud-input" />
+                <button id="btn-apply-gemini" class="btn-xs-primary">Analyze with Gemini</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 2: Standard Text Report (Exact format from prompt) -->
+        <div id="view-format-text" class="format-view-panel">
+          <div class="code-container">
+            <pre class="report-pre" id="text-report-output">Generating text report...</pre>
+          </div>
+        </div>
+
+        <!-- Tab 3: Markdown Format -->
+        <div id="view-format-markdown" class="format-view-panel">
+          <div class="code-container">
+            <pre class="report-pre" id="markdown-report-output">Generating markdown...</pre>
+          </div>
+        </div>
+
+        <!-- Tab 4: JSON Format -->
+        <div id="view-format-json" class="format-view-panel">
+          <div class="code-container">
+            <pre class="report-pre json-pre" id="json-report-output">Generating JSON...</pre>
+          </div>
+        </div>
+
+        <!-- Tab 5: CSV Format -->
+        <div id="view-format-csv" class="format-view-panel">
+          <div class="code-container">
+            <pre class="report-pre" id="csv-report-output">Generating CSV...</pre>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Phone Connect / QR Code Modal -->
+    <div class="modal-backdrop" id="mobile-modal" style="display: none;">
+      <div class="mobile-dialog">
+        <div class="mobile-dialog-header">
+          <h3>📱 Connect Phone Camera</h3>
+          <button id="btn-close-mobile-modal" class="close-modal-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"/>
+              <line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+          </button>
+        </div>
+        <div class="mobile-dialog-content">
+          <p class="dialog-explainer">
+            To point your phone's camera at objects, connect your phone to the same Wi-Fi network and open the address below or scan the QR code:
+          </p>
+          <div class="qr-code-wrapper" id="qr-code-container">
+            <canvas id="qr-canvas"></canvas>
+          </div>
+          <div class="url-copy-box">
+            <input type="text" id="lan-url-input" readonly value="" class="hud-input" />
+            <button id="btn-copy-url" class="btn-primary">Copy URL</button>
+          </div>
+          <div class="callout-tip">
+            💡 <strong>Tip for Mobile Browsers:</strong> When opening on Chrome or Safari, tap <em>"Allow"</em> when prompted for camera access. The app automatically selects your rear (environment) camera.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast Notification Overlay -->
+    <div id="toast-container" class="toast-container"></div>
+
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
