@@ -1,0 +1,22 @@
+{
+  "name": "ceova-ai-vision",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Ceova AI Vision - Real-time Object Tracking, IP Webcam Discovery & Surveillance Dashboard",
+  "scripts": {
+    "dev": "npm run dev --prefix frontend",
+    "build": "npm run build --prefix frontend",
+    "lint": "npm run lint --prefix frontend",
+    "preview": "npm run preview --prefix frontend"
+  },
+  "keywords": [
+    "ai",
+    "yolo",
+    "computer-vision",
+    "ip-webcam",
+    "object-detection",
+    "bytetrack"
+  ],
+  "author": "Ceova",
+  "license": "MIT"
+}
