@@ -1,0 +1,28 @@
+{
+  "name": "ceova-ai-vision",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Ceova AI Vision - Real-time Object Tracking, IP Webcam Discovery & Surveillance Dashboard",
+  "type": "module",
+  "scripts": {
+    "dev": "node dev.js",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:backend": "python backend/run_companion.py",
+    "build": "cd frontend && npm install && npm run build",
+    "install:frontend": "cd frontend && npm install",
+    "preview": "cd frontend && npm run preview",
+    "start": "node dev.js"
+  },
+  "keywords": [
+    "ai",
+    "yolo",
+    "computer-vision",
+    "ip-webcam",
+    "object-detection",
+    "bytetrack",
+    "fastapi",
+    "react"
+  ],
+  "author": "Ceova",
+  "license": "MIT"
+}
